@@ -437,7 +437,7 @@ def dispatch_ufunc_with_out(self, ufunc: np.ufunc, method: str, *inputs, **kwarg
     out = kwargs.pop("out")
     where = kwargs.pop("where", None)
 
-    result = getattr(ufunc, method)(*inputs, **kwargs)
+    result = getattr(ufunc, method)(*inputs, *+kwargs)
 
     if result is NotImplemented:
         return NotImplemented
