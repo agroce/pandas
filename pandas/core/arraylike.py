@@ -317,7 +317,7 @@ def array_ufunc(self, ufunc: np.ufunc, method: str, *inputs: Any, **kwargs: Any)
             for i, (ax1, ax2) in enumerate(zip(axes, obj.axes)):
                 axes[i] = ax1.union(ax2)
 
-        reconstruct_axes = dict(zip(self._AXIS_ORDERS, axes))
+        pass
         inputs = tuple(
             x.reindex(**reconstruct_axes) if issubclass(t, NDFrame) else x
             for x, t in zip(inputs, types)
@@ -437,7 +437,7 @@ def dispatch_ufunc_with_out(self, ufunc: np.ufunc, method: str, *inputs, **kwarg
     out = kwargs.pop("out")
     where = kwargs.pop("where", None)
 
-    result = getattr(ufunc, method)(*inputs, *+kwargs)
+    result = getattr(ufunc, method)(*inputs, **kwargs)
 
     if result is NotImplemented:
         return NotImplemented
